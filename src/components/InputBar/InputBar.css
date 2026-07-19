@@ -4,9 +4,7 @@
 
 .input-card {
   display: flex;
-
   flex-direction: column;
-
   gap: 24px;
 }
 
@@ -14,92 +12,103 @@
 
 .input-header h3 {
   font-size: 1.25rem;
-
   font-weight: 700;
-
   letter-spacing: -0.02em;
 }
 
 .input-header p {
   margin-top: 8px;
-
   color: var(--text-secondary);
-
   font-size: 0.95rem;
 }
 
-/* ============================================ */
+/* ============================================
+   Controls
+============================================ */
 
-.input-bar {
+.input-controls {
   display: flex;
-
-  gap: 18px;
-
-  align-items: center;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* ============================================ */
+/* ============================================
+   Input
+============================================ */
 
-.input-bar input {
-  flex: 1;
-
+.input-controls input {
+  width: 100%;
   height: 58px;
 
-  padding: 0 22px;
+  padding: 0 20px;
 
-  border-radius: 18px;
+  border-radius: 16px;
 
   border: 1px solid var(--border);
 
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
 
-  color: white;
+  color: var(--text-primary);
 
   font-size: 15px;
 
   transition: var(--transition);
 
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(12px);
 }
 
-/* ============================================ */
-
-.input-bar input::placeholder {
+.input-controls input::placeholder {
   color: var(--text-secondary);
 }
 
-/* ============================================ */
+.input-controls input:focus {
+  outline: none;
 
-.input-bar input:focus {
   border-color: rgba(59, 130, 246, 0.65);
 
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.07);
 
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
 }
 
-/* ============================================ */
+/* ============================================
+   Button
+============================================ */
 
-.input-bar button {
-  min-width: 160px;
+.input-controls button {
+  width: 100%;
+  height: 56px;
 
-  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: none;
+  border-radius: 16px;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
 }
 
-/* ============================================ */
+.input-controls button:hover {
+  transform: translateY(-2px);
 
-.input-bar button svg {
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.35);
+}
+
+.input-controls button:active {
+  transform: translateY(0);
+}
+
+.input-controls button svg {
   flex-shrink: 0;
-}
-
-/* ============================================ */
-
-@media (max-width: 768px) {
-  .input-bar {
-    flex-direction: column;
-  }
-
-  .input-bar button {
-    width: 100%;
-  }
 }

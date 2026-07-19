@@ -15,6 +15,11 @@ function InputBar({ onCreate }: Props) {
     onCreate(task.trim());
     setTask("");
   };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleCreate();
+    }
+  };
 
   return (
     <div className="input-card">
@@ -23,20 +28,16 @@ function InputBar({ onCreate }: Props) {
         <p>Capture your ideas before organizing them.</p>
       </div>
 
-      <div className="input-bar">
+      <div className="input-controls">
         <input
           type="text"
-          placeholder="What needs your attention today?"
           value={task}
           onChange={(e) => setTask(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleCreate();
-            }
-          }}
+          onKeyDown={handleKeyDown}
+          placeholder="What needs your attention today?"
         />
 
-        <button className="primary-btn" onClick={handleCreate}>
+        <button onClick={handleCreate}>
           <Plus size={18} />
           Add Task
         </button>

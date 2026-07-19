@@ -146,46 +146,50 @@ function App() {
           </div>
         </header>
 
-        {/* Quick Add */}
+        {/* Quick Add + Inbox */}
 
-        <section className="section">
-          <div className="section-header">
-            <div>
-              <h2 className="section-title">Quick Add</h2>
-              <p className="section-subtitle">
-                Capture tasks before organizing them.
-              </p>
+        <div className="top-row">
+          {/* Quick Add */}
+
+          <section className="section quick-add-section">
+            <div className="section-header">
+              <div>
+                <h2 className="section-title">Quick Add</h2>
+                <p className="section-subtitle">
+                  Capture tasks before organizing them.
+                </p>
+              </div>
+
+              <Sparkles size={18} color="#60A5FA" />
             </div>
 
-            <Sparkles size={18} color="#60A5FA" />
-          </div>
+            <InputBar onCreate={addNote} />
+          </section>
 
-          <InputBar onCreate={addNote} />
-        </section>
+          {/* Inbox */}
 
-        {/* Inbox */}
+          <section className="section inbox-section">
+            <div className="section-header">
+              <div>
+                <h2 className="section-title">Inbox</h2>
+                <p className="section-subtitle">
+                  Tasks waiting to be prioritized.
+                </p>
+              </div>
 
-        <section className="section">
-          <div className="section-header">
-            <div>
-              <h2 className="section-title">Inbox</h2>
-              <p className="section-subtitle">
-                Tasks waiting to be prioritized.
-              </p>
+              <span className="section-count">
+                {notes.filter((n) => n.quadrant === "none").length} Tasks
+              </span>
             </div>
 
-            <span className="section-count">
-              {notes.filter((n) => n.quadrant === "none").length} Tasks
-            </span>
-          </div>
-
-          <StickyNotesList
-            notes={notes}
-            onDelete={deleteNote}
-            onEdit={editNote}
-            onMove={moveNote}
-          />
-        </section>
+            <StickyNotesList
+              notes={notes}
+              onDelete={deleteNote}
+              onEdit={editNote}
+              onMove={moveNote}
+            />
+          </section>
+        </div>
 
         {/* Matrix */}
 
