@@ -1,0 +1,14 @@
+.sticky-list {
+    margin-bottom: 40px;
+}
+
+.notes-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.empty {
+    color: gray;
+    font-style: italic;
+}
