@@ -1,103 +1,181 @@
+/* ==========================================
+   Modern Task Card
+========================================== */
+
 .sticky-note {
-  width: 180px;
-  min-height: 180px;
-
-  padding: 18px;
-
-  border-radius: 10px;
-
   display: flex;
+
   flex-direction: column;
-  justify-content: space-between;
 
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  gap: 18px;
 
-  transition:
-    box-shadow .25s,
-    opacity .2s,
-    transform .2s;
+  min-height: 170px;
 
-  user-select: none;
+  padding: 20px;
 
-  position: relative;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.02)
+  );
+
+  border: 1px solid var(--border);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow: var(--shadow-sm);
+
+  transition: var(--transition);
 }
 
 .sticky-note:hover {
-  box-shadow: 0 12px 25px rgba(0,0,0,.25);
+  transform: translateY(-4px);
+
+  box-shadow: var(--shadow);
 }
 
-.sticky-note.dragging {
+.dragging {
   cursor: grabbing;
 }
 
+/* ========================================== */
+
+.note-top {
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+/* ========================================== */
+
 .drag-handle {
-  align-self: flex-end;
+  width: 34px;
 
-  cursor: grab;
+  height: 34px;
 
-  font-size: 22px;
+  display: flex;
 
-  color: #555;
+  align-items: center;
 
-  margin-bottom: 8px;
+  justify-content: center;
 
-  padding: 2px 6px;
+  border-radius: 10px;
 
-  border-radius: 6px;
+  background: transparent;
+
+  color: var(--text-secondary);
+
+  transition: var(--transition);
 }
 
 .drag-handle:hover {
-  background: rgba(0,0,0,.08);
+  background: rgba(255, 255, 255, 0.06);
+
+  color: white;
 }
 
-.drag-handle:active {
-  cursor: grabbing;
-}
+/* ========================================== */
 
-.sticky-note p {
+.note-content {
   flex: 1;
 
-  margin: 0;
+  font-size: 1rem;
 
-  font-size: 17px;
+  line-height: 1.7;
+
+  color: white;
 
   word-break: break-word;
 }
 
-.sticky-note textarea {
+/* ========================================== */
+
+textarea {
   width: 100%;
 
-  min-height: 90px;
+  min-height: 95px;
 
   resize: none;
 
-  border: none;
+  background: rgba(255, 255, 255, 0.04);
 
-  outline: none;
+  border: 1px solid var(--border);
 
-  background: transparent;
+  border-radius: 14px;
 
-  font-size: 16px;
+  padding: 14px;
 
-  font-family: inherit;
+  color: white;
+
+  font-size: 0.95rem;
+
+  line-height: 1.6;
 }
+
+textarea:focus {
+  border-color: var(--primary);
+
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+/* ========================================== */
 
 .actions {
   display: flex;
 
   justify-content: flex-end;
 
-  gap: 8px;
+  gap: 10px;
 
-  margin-top: 15px;
+  margin-top: auto;
 }
 
-.actions button {
-  border: none;
+/* ========================================== */
 
-  background: transparent;
+.icon-btn {
+  width: 38px;
 
-  cursor: pointer;
+  height: 38px;
 
-  font-size: 20px;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid var(--border);
+
+  color: var(--text-secondary);
+
+  transition: var(--transition);
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+
+  color: white;
+
+  transform: translateY(-2px);
+}
+
+.icon-btn.success:hover {
+  color: #22c55e;
+}
+
+.icon-btn.danger:hover {
+  color: #ef4444;
+}
+
+/* ========================================== */
+
+@media (max-width: 768px) {
+  .sticky-note {
+    min-height: 150px;
+  }
 }

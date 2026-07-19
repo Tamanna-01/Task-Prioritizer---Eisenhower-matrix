@@ -1,37 +1,233 @@
+/* ==========================================
+   Quadrant
+========================================== */
+
 .quadrant {
-  background: #ffa500;
+  display: flex;
+  flex-direction: column;
 
-  min-height: 310px;
+  min-height: 320px;
 
-  padding: 15px;
+  background: rgba(15, 23, 42, 0.65);
+
+  border: 1px solid var(--border);
+
+  border-radius: 24px;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  overflow: hidden;
+
+  transition: all 0.25s ease;
+}
+
+/* ==========================================
+   Hover
+========================================== */
+
+.quadrant:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+}
+
+/* ==========================================
+   Drag Over
+========================================== */
+
+.quadrant.over {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 2px rgba(59, 130, 246, 0.35),
+    0 20px 50px rgba(59, 130, 246, 0.18);
+
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.08),
+    rgba(15, 23, 42, 0.72)
+  );
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.quadrant-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 18px 20px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================
+   Icon
+========================================== */
+
+.quadrant-icon {
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 14px;
 
   display: flex;
 
-  flex-wrap: wrap;
+  align-items: center;
 
-  align-content: flex-start;
+  justify-content: center;
 
-  gap: 15px;
+  background: rgba(59, 130, 246, 0.12);
 
-  transition: 0.25s;
+  color: var(--primary);
+
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   Titles
+========================================== */
+
+.quadrant-title-group {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.quadrant-title-group h3 {
+  margin: 0;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  color: var(--text-primary);
+}
+
+.quadrant-title-group p {
+  margin: 4px 0 0;
+
+  font-size: 0.85rem;
+
+  color: var(--text-secondary);
+}
+
+/* ==========================================
+   Body
+========================================== */
+
+.quadrant-body {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+
+  padding: 18px;
 
   overflow-y: auto;
 }
 
-.over {
-  background: #ffc44d;
+/* Scrollbar */
 
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+.quadrant-body::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Borders */
+.quadrant-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
 
-.matrix-wrapper > .quadrant:nth-child(5),
-.matrix-wrapper > .quadrant:nth-child(8) {
-  border-right: 2px solid #444;
+  border-radius: 999px;
 }
 
-.matrix-wrapper > .quadrant:nth-child(5),
-.matrix-wrapper > .quadrant:nth-child(6) {
-  border-bottom: 2px solid #444;
+.quadrant-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ==========================================
+   Empty State
+========================================== */
+
+.empty-state {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 24px;
+}
+
+.empty-icon {
+  width: 62px;
+
+  height: 62px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background: rgba(59, 130, 246, 0.12);
+
+  color: var(--primary);
+
+  margin-bottom: 18px;
+}
+
+.empty-state h4 {
+  margin: 0;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  color: var(--text-primary);
+}
+
+.empty-state p {
+  margin-top: 10px;
+
+  color: var(--text-secondary);
+
+  max-width: 220px;
+
+  line-height: 1.6;
+
+  font-size: 0.92rem;
+}
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media (max-width: 900px) {
+  .quadrant {
+    min-height: 260px;
+  }
+
+  .quadrant-header {
+    padding: 16px;
+  }
+
+  .quadrant-body {
+    padding: 16px;
+  }
 }

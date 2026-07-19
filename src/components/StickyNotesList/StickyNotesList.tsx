@@ -1,7 +1,9 @@
-import StickyNote from "../StickyNote/StickyNote";
-import type { Note } from "../../types/Note";
-
+import { Inbox } from "lucide-react";
 import { useDroppable } from "@dnd-kit/core";
+
+import StickyNote from "../StickyNote/StickyNote";
+
+import type { Note } from "../../types/Note";
 
 import "./StickyNotesList.css";
 
@@ -13,35 +15,51 @@ interface Props {
 }
 
 function StickyNotesList({ notes, onDelete, onEdit, onMove }: Props) {
+  const inboxNotes = notes.filter((note) => note.quadrant === "none");
+
   const { setNodeRef, isOver } = useDroppable({
     id: "none",
   });
+
   return (
     <div
       ref={setNodeRef}
-      className="sticky-list"
-      style={{
-        backgroundColor: isOver ? "#d9f7be" : "",
-        transition: "0.2s",
-      }}
+      className={`sticky-list ${isOver ? "drag-over" : ""}`}
     >
-      <h2>Sticky Notes</h2>
+      <div className="sticky-header">
+        <div className="sticky-title">
+          <Inbox size={20} />
 
-      {notes.length === 0 ? (
-        <div className="empty">No sticky notes yet.</div>
+          <h3>Inbox</h3>
+        </div>
+
+        <span className="sticky-count">
+          {inboxNotes.length} Task
+          {inboxNotes.length !== 1 ? "s" : ""}
+        </span>
+      </div>
+
+      {inboxNotes.length === 0 ? (
+        <div className="empty-state">
+          <Inbox size={52} />
+
+          <h3>Inbox is empty</h3>
+
+          <p>
+            Create a task above and drag it into the matrix when you're ready.
+          </p>
+        </div>
       ) : (
         <div className="notes-container">
-          {notes
-            .filter((note) => note.quadrant === "none")
-            .map((note) => (
-              <StickyNote
-                key={note.id}
-                note={note}
-                onDelete={onDelete}
-                onEdit={onEdit}
-                onMove={onMove}
-              />
-            ))}
+          {inboxNotes.map((note) => (
+            <StickyNote
+              key={note.id}
+              note={note}
+              onDelete={onDelete}
+              onEdit={onEdit}
+              onMove={onMove}
+            />
+          ))}
         </div>
       )}
     </div>

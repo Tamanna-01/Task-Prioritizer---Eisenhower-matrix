@@ -1,7 +1,15 @@
 import "./MatrixBoard.css";
-import Quadrant from "../Quadrant/Quadrant";
-import { BOARD_QUADRANTS } from "../../utils/boardConfig";
+
 import type { Note } from "../../types/Note";
+
+import Quadrant from "../Quadrant/Quadrant";
+
+import {
+  Flame,
+  CalendarClock,
+  Users,
+  Trash2,
+} from "lucide-react";
 
 interface Props {
   notes: Note[];
@@ -33,30 +41,68 @@ function MatrixBoard({
   );
 
   return (
-    <div className="board-container">
-      <h2>Eisenhower Matrix</h2>
+    <section className="board-container">
+
+      <div className="board-heading">
+        <h2>Focus Matrix</h2>
+
+        <p>
+          Organize your work using the
+          Eisenhower Matrix.
+        </p>
+      </div>
 
       <div className="matrix-wrapper">
 
-        <div className="corner"></div>
+        {/* Corner */}
 
-        <div className="header">
-          Urgent
-          <span>DO</span>
+        <div className="corner" />
+
+        {/* Top Axis */}
+
+        <div className="axis-header">
+
+          <div className="axis-title">
+            URGENT
+          </div>
+
+          <div className="axis-subtitle">
+            Do First
+          </div>
+
         </div>
 
-        <div className="header">
-          Not Urgent
-          <span>DECIDE</span>
+        <div className="axis-header">
+
+          <div className="axis-title">
+            NOT URGENT
+          </div>
+
+          <div className="axis-subtitle">
+            Schedule
+          </div>
+
         </div>
 
-        <div className="side-label">
-          Important
-          <span>DELEGATE</span>
+        {/* Left Axis */}
+
+        <div className="side-axis">
+
+          <div className="axis-title">
+            IMPORTANT
+          </div>
+
+          <div className="axis-subtitle">
+            High Impact
+          </div>
+
         </div>
 
         <Quadrant
           id="urgent-important"
+          title="Urgent & Important"
+          subtitle="Do First"
+          icon={<Flame size={18} />}
           notes={urgentImportant}
           onDelete={onDelete}
           onEdit={onEdit}
@@ -65,19 +111,32 @@ function MatrixBoard({
 
         <Quadrant
           id="noturgent-important"
+          title="Not Urgent & Important"
+          subtitle="Schedule"
+          icon={<CalendarClock size={18} />}
           notes={notUrgentImportant}
           onDelete={onDelete}
           onEdit={onEdit}
           onMove={onMove}
         />
 
-        <div className="side-label">
-          Not Important
-          <span>DELETE</span>
+        <div className="side-axis">
+
+          <div className="axis-title">
+            NOT IMPORTANT
+          </div>
+
+          <div className="axis-subtitle">
+            Delegate / Eliminate
+          </div>
+
         </div>
 
         <Quadrant
           id="urgent-notimportant"
+          title="Urgent & Not Important"
+          subtitle="Delegate"
+          icon={<Users size={18} />}
           notes={urgentNotImportant}
           onDelete={onDelete}
           onEdit={onEdit}
@@ -86,6 +145,9 @@ function MatrixBoard({
 
         <Quadrant
           id="noturgent-notimportant"
+          title="Not Urgent & Not Important"
+          subtitle="Eliminate"
+          icon={<Trash2 size={18} />}
           notes={notUrgentNotImportant}
           onDelete={onDelete}
           onEdit={onEdit}
@@ -93,7 +155,8 @@ function MatrixBoard({
         />
 
       </div>
-    </div>
+
+    </section>
   );
 }
 

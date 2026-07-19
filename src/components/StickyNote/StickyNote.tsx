@@ -1,9 +1,12 @@
 import { useState } from "react";
 import type { Note } from "../../types/Note";
+
 import "./StickyNote.css";
 
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+
+import { GripVertical, Pencil, Trash2, Check, X } from "lucide-react";
 
 interface Props {
   note: Note;
@@ -16,82 +19,74 @@ function StickyNote({ note, onDelete, onEdit }: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(note.text);
 
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    isDragging,
-  } = useDraggable({
-    id: note.id,
-  });
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: note.id,
+    });
 
   const style = {
-    backgroundColor: note.color,
     transform: CSS.Translate.toString(transform),
-    opacity: isDragging ? 0.25 : 1,
-    zIndex: isDragging ? 1 : "auto",
+    opacity: isDragging ? 0.35 : 1,
+    zIndex: isDragging ? 10 : "auto",
+  };
+
+  const save = () => {
+    if (!editedText.trim()) return;
+
+    onEdit(note.id, editedText.trim());
+
+    setIsEditing(false);
+  };
+
+  const cancel = () => {
+    setEditedText(note.text);
+    setIsEditing(false);
   };
 
   return (
     <div
       ref={setNodeRef}
-      className={`sticky-note ${isDragging ? "dragging" : ""}`}
       style={style}
+      className={`sticky-note ${isDragging ? "dragging" : ""}`}
     >
-      {/* Drag Handle */}
-      <div
-        className="drag-handle"
-        {...listeners}
-        {...attributes}
-      >
-        ⠿
+      <div className="note-top">
+        <button className="drag-handle" {...listeners} {...attributes}>
+          <GripVertical size={18} />
+        </button>
       </div>
 
       {isEditing ? (
         <>
           <textarea
+            autoFocus
             value={editedText}
             onChange={(e) => setEditedText(e.target.value)}
           />
 
           <div className="actions">
-            <button
-              onClick={() => {
-                if (!editedText.trim()) return;
-
-                onEdit(note.id, editedText);
-                setIsEditing(false);
-              }}
-            >
-              💾
+            <button className="icon-btn success" onClick={save}>
+              <Check size={17} />
             </button>
 
-            <button
-              onClick={() => {
-                setEditedText(note.text);
-                setIsEditing(false);
-              }}
-            >
-              ❌
+            <button className="icon-btn" onClick={cancel}>
+              <X size={17} />
             </button>
           </div>
         </>
       ) : (
         <>
-          <p>{note.text}</p>
+          <div className="note-content">{note.text}</div>
 
           <div className="actions">
-            <button
-              onClick={() => setIsEditing(true)}
-            >
-              ✏️
+            <button className="icon-btn" onClick={() => setIsEditing(true)}>
+              <Pencil size={17} />
             </button>
 
             <button
+              className="icon-btn danger"
               onClick={() => onDelete(note.id)}
             >
-              🗑️
+              <Trash2 size={17} />
             </button>
           </div>
         </>

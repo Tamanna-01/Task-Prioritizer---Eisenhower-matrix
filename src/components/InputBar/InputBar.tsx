@@ -1,40 +1,48 @@
 import { useState } from "react";
+import { Plus } from "lucide-react";
 import "./InputBar.css";
 
 interface Props {
-    onCreate: (text: string) => void;
+  onCreate: (text: string) => void;
 }
 
 function InputBar({ onCreate }: Props) {
-    const [task, setTask] = useState("");
+  const [task, setTask] = useState("");
 
-    const handleCreate = () => {
-        if (!task.trim()) return;
+  const handleCreate = () => {
+    if (!task.trim()) return;
 
-        onCreate(task);
+    onCreate(task.trim());
+    setTask("");
+  };
 
-        setTask("");
-    };
+  return (
+    <div className="input-card">
+      <div className="input-header">
+        <h3>Add a new task</h3>
+        <p>Capture your ideas before organizing them.</p>
+      </div>
 
-    return (
-        <div className="input-bar">
-            <input
-                type="text"
-                placeholder="Enter your task..."
-                value={task}
-                onChange={(e) => setTask(e.target.value)}
-                onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                        handleCreate();
-                    }
-                }}
-            />
+      <div className="input-bar">
+        <input
+          type="text"
+          placeholder="What needs your attention today?"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleCreate();
+            }
+          }}
+        />
 
-            <button onClick={handleCreate}>
-                Create
-            </button>
-        </div>
-    );
+        <button className="primary-btn" onClick={handleCreate}>
+          <Plus size={18} />
+          Add Task
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default InputBar;
